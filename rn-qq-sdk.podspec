@@ -13,10 +13,16 @@ Pod::Spec.new do |s|
   s.license    = { :type => "BSD-3-Clause", :file => "LICENSE" }
   s.authors      = { "phecda" => "phecda@brae.co" }
   s.platforms    = { :ios => "9.0" }
-  s.source       = { :git => "https://github.com/icemangotech/rn-qq-sdk.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/icemangotech/rn-qq-sdk.git", :tag => "v#{s.version}" }
 
   s.source_files = "ios/**/*.{h,m,swift}"
   s.requires_arc = true
+
+  s.vendored_frameworks = 'ios/RCTQQSDK/TencentOpenAPI.framework'
+  s.resource  = 'ios/RCTQQSDK/TencentOpenApi_IOS_Bundle.bundle'
+
+  s.framework = 'SystemConfiguration','CoreGraphics','CoreTelephony'
+  s.libraries = 'iconv','sqlite3','stdc++','z'
 
   s.dependency "React"
   # ...
