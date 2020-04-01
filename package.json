@@ -24,7 +24,7 @@
     "name": "phecda",
     "email": "phecda@brae.co"
   },
-  "license": "MIT",
+  "license": "BSD-3-Clause",
   "licenseFilename": "LICENSE",
   "readmeFilename": "README.md",
   "peerDependencies": {

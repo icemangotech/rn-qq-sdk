@@ -10,8 +10,7 @@ Pod::Spec.new do |s|
                   rn-qq-sdk
                    DESC
   s.homepage     = "https://github.com/icemangotech/rn-qq-sdk"
-  s.license      = "MIT"
-  # s.license    = { :type => "MIT", :file => "FILE_LICENSE" }
+  s.license    = { :type => "BSD-3-Clause", :file => "LICENSE" }
   s.authors      = { "phecda" => "phecda@brae.co" }
   s.platforms    = { :ios => "9.0" }
   s.source       = { :git => "https://github.com/icemangotech/rn-qq-sdk.git", :tag => "#{s.version}" }
