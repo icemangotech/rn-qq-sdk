@@ -1,0 +1,68 @@
+{
+  "name": "@phecdas/rn-qq-sdk",
+  "title": "React Native QQ SDK",
+  "version": "1.0.0",
+  "description": "TODO",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "commit": "git-cz",
+    "release": "standard-version",
+    "lint": "eslint ./src --fix --ext .ts,.tsx",
+    "build": "tsc; eslint ./bin --fix --ext .ts,.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/icemangotech/rn-qq-sdk.git",
+    "baseUrl": "https://github.com/icemangotech/rn-qq-sdk"
+  },
+  "keywords": [
+    "react-native",
+    "QQ"
+  ],
+  "author": {
+    "name": "phecda",
+    "email": "phecda@brae.co"
+  },
+  "license": "MIT",
+  "licenseFilename": "LICENSE",
+  "readmeFilename": "README.md",
+  "peerDependencies": {
+    "react": "^16.8.1",
+    "react-native": ">=0.60.0-rc.0 <1.0.x"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@react-native-community/eslint-config": "^0.0.7",
+    "@types/react-native": "^0.61.23",
+    "@typescript-eslint/eslint-plugin": "^2.25.0",
+    "@typescript-eslint/parser": "^2.25.0",
+    "commitizen": "^4.0.3",
+    "cz-conventional-changelog": "^3.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "husky": "^4.2.3",
+    "lint-staged": "^10.0.9",
+    "prettier": "^2.0.2",
+    "react": "^16.9.0",
+    "react-native": "^0.61.5",
+    "standard-version": "^7.1.0",
+    "typescript": "^3.8.3"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": "eslint --fix"
+  }
+}
