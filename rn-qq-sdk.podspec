@@ -18,8 +18,8 @@ Pod::Spec.new do |s|
   s.source_files = "ios/**/*.{h,m,swift}"
   s.requires_arc = true
 
-  s.vendored_frameworks = 'ios/RCTQQSDK/TencentOpenAPI.framework'
-  s.resource  = 'ios/RCTQQSDK/TencentOpenApi_IOS_Bundle.bundle'
+  s.vendored_frameworks = 'ios/TencentOpenAPI.framework'
+  s.resource  = 'ios/TencentOpenApi_IOS_Bundle.bundle'
 
   s.framework = 'SystemConfiguration','CoreGraphics','CoreTelephony'
   s.libraries = 'iconv','sqlite3','stdc++','z'
