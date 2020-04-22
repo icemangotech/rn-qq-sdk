@@ -2,7 +2,7 @@
   "name": "@phecdas/rn-qq-sdk",
   "title": "React Native QQ SDK",
   "version": "0.0.1",
-  "description": "TODO",
+  "description": "React native bridge module for Tencent QQ SDK.",
   "main": "bin/index.js",
   "types": "bin/index.d.ts",
   "scripts": {
@@ -65,5 +65,8 @@
   },
   "lint-staged": {
     "*.{ts,tsx}": "eslint --fix"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
