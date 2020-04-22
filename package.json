@@ -1,7 +1,7 @@
 {
   "name": "@phecdas/rn-qq-sdk",
   "title": "React Native QQ SDK",
-  "version": "0.0.1",
+  "version": "1.0.0-0",
   "description": "React native bridge module for Tencent QQ SDK.",
   "main": "bin/index.js",
   "types": "bin/index.d.ts",
