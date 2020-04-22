@@ -41,14 +41,8 @@
 {
     NSString * aURLString =  [aNotification userInfo][@"url"];
     NSURL * aURL = [NSURL URLWithString:aURLString];
-
-    if ([QQApiInterface handleOpenURL:aURL delegate:self]) {
-        return YES;
-    } else if ([TencentOAuth HandleOpenURL:aURL]) {
-        return YES;
-    } else {
-        return NO;
-    }
+    
+    return [QQApiInterface handleOpenURL:aURL delegate:self] || [QQApiInterface handleOpenUniversallink:aURL delegate:self] || [TencentOAuth HandleOpenURL:aURL] || [TencentOAuth HandleUniversalLink:aURL];
 }
 
 RCT_EXPORT_MODULE()
