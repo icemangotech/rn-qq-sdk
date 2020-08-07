@@ -1,6 +1,10 @@
 #import <React/RCTBridgeModule.h>
 #import <React/RCTEventEmitter.h>
+#if __has_include(<React/RCTImageLoader.h>)
+#import <React/RCTImageLoader.h>
+#else
 #import <React/RCTImageLoaderProtocol.h>
+#endif
 #import <TencentOpenAPI/QQApiInterface.h>
 #import <TencentOpenAPI/TencentOAuth.h>
 
