@@ -128,6 +128,7 @@ class BCQQsdkModule(private val reactContext: ReactApplicationContext) : ReactCo
           QQShareScene.QZone -> {
             bundle.putInt(QzoneShare.SHARE_TO_QZONE_KEY_TYPE, QzonePublish.PUBLISH_TO_QZONE_TYPE_PUBLISHMOOD)
             bundle.putString(QzoneShare.SHARE_TO_QQ_TITLE, extractString(data, "text"))
+            bundle.putString(QzoneShare.SHARE_TO_QQ_SUMMARY, extractString(data, "text"))
 
             sharePromise = promise
             publishToQzone(bundle)
