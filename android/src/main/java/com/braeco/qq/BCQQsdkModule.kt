@@ -96,6 +96,19 @@ class BCQQsdkModule(private val reactContext: ReactApplicationContext) : ReactCo
   }
 
   @ReactMethod
+  fun openQQ(promise: Promise) {
+    val pkgName = "com.tencent.mobileqq"
+    if (TextUtils.isEmpty(pkgName)) {
+      promise.reject("", INVOKE_FAILED)
+      return
+    }
+    val pkgMg = reactContext.packageManager
+    val intent = pkgMg.getLaunchIntentForPackage(pkgName)
+    reactContext.startActivity(intent)
+    promise.resolve(null)
+  }
+
+  @ReactMethod
   fun shareMessage(data: ReadableMap, promise: Promise) {
     if (mTencent == null) {
       promise.reject("", NOT_REGISTERED)
