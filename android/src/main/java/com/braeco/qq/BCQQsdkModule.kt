@@ -96,6 +96,19 @@ class BCQQsdkModule(private val reactContext: ReactApplicationContext) : ReactCo
   }
 
   @ReactMethod
+  fun openQQ(promise: Promise) {
+    val pkgName = "com.tencent.mobileqq"
+    if (TextUtils.isEmpty(pkgName)) {
+      promise.reject("", INVOKE_FAILED)
+      return
+    }
+    val pkgMg = reactContext.packageManager
+    val intent = pkgMg.getLaunchIntentForPackage(pkgName)
+    reactContext.startActivity(intent)
+    promise.resolve(null)
+  }
+
+  @ReactMethod
   fun shareMessage(data: ReadableMap, promise: Promise) {
     if (mTencent == null) {
       promise.reject("", NOT_REGISTERED)
@@ -128,6 +141,7 @@ class BCQQsdkModule(private val reactContext: ReactApplicationContext) : ReactCo
           QQShareScene.QZone -> {
             bundle.putInt(QzoneShare.SHARE_TO_QZONE_KEY_TYPE, QzonePublish.PUBLISH_TO_QZONE_TYPE_PUBLISHMOOD)
             bundle.putString(QzoneShare.SHARE_TO_QQ_TITLE, extractString(data, "text"))
+            bundle.putString(QzoneShare.SHARE_TO_QQ_SUMMARY, extractString(data, "text"))
 
             sharePromise = promise
             publishToQzone(bundle)

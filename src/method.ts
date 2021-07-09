@@ -27,6 +27,10 @@ export async function shareMessage(message: ShareReq) {
   }
 }
 
+export function openQQ(): Promise<void> {
+  return BCQQsdk.openQQ();
+}
+
 export class QQError extends Error {
   code: number;
   constructor(result: QQResult) {

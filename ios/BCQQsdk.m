@@ -41,7 +41,7 @@
 {
     NSString * aURLString =  [aNotification userInfo][@"url"];
     NSURL * aURL = [NSURL URLWithString:aURLString];
-    
+
     return [QQApiInterface handleOpenURL:aURL delegate:self] || [QQApiInterface handleOpenUniversallink:aURL delegate:self] || [TencentOAuth HandleOpenURL:aURL] || [TencentOAuth HandleUniversalLink:aURL];
 }
 
@@ -58,13 +58,22 @@ RCT_EXPORT_METHOD(registerApp: (NSString*)appId
     resolve(nil);
 }
 
+RCT_EXPORT_METHOD(openQQ:(RCTPromiseResolveBlock)resolve :(RCTPromiseRejectBlock)reject)
+{
+    if ([QQApiInterface openQQ]) {
+        resolve(nil);
+    } else {
+        reject(nil, nil, nil);
+    }
+}
+
 RCT_EXPORT_METHOD(shareMessage: (NSDictionary*)data
                   :(RCTPromiseResolveBlock)resolve
                   :(RCTPromiseRejectBlock)reject)
 {
     _shareResolve = resolve;
     _shareReject = reject;
-    
+
     NSString* thumbUrl = data[@"thumbUrl"];
     if (thumbUrl.length) {
         [self loadImageFromURLString:thumbUrl shouldDownSample:YES completionBlock:^(NSData* thumbnailData) {
@@ -81,7 +90,7 @@ RCT_EXPORT_METHOD(shareMessage: (NSDictionary*)data
     QQShareScene scene = [data[@"scene"] integerValue];
     NSString* title = data[@"title"];
     NSString* description = data[@"description"];
-    
+
     switch (type) {
         case QQShareTypeText: {
             NSString* text = data[@"text"];
@@ -92,7 +101,7 @@ RCT_EXPORT_METHOD(shareMessage: (NSDictionary*)data
         case QQShareTypeImage: {
             NSString* imageUrl = data[@"imageUrl"];
             [self loadImageFromURLString:imageUrl shouldDownSample:NO completionBlock:^(NSData* data) {
-                
+
                 if (!data) {
                     [self onShareReject:nil :@"Image Load Failed" :nil];
                     return;
@@ -107,7 +116,7 @@ RCT_EXPORT_METHOD(shareMessage: (NSDictionary*)data
         }
         case QQShareTypeWeb: {
             NSString* webpageUrl = data[@"webpageUrl"];
-            
+
             QQApiNewsObject* obj = [QQApiNewsObject objectWithURL:[NSURL URLWithString:webpageUrl] title:title description:description previewImageData:thumbnailData];
             [self shareObject:obj toScene:scene];
             break;
@@ -149,9 +158,9 @@ RCT_EXPORT_METHOD(shareMessage: (NSDictionary*)data
         default:
             [object setCflag:kQQAPICtrlFlagQQShare];
     }
-    
+
     SendMessageToQQReq* req = [SendMessageToQQReq reqWithContent:object];
-    
+
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         QQApiSendResultCode result = [QQApiInterface sendReq:req];
         if (result != EQQAPISENDSUCESS) {
@@ -188,9 +197,9 @@ RCT_EXPORT_METHOD(shareMessage: (NSDictionary*)data
 {
     NSURL* url = [NSURL URLWithString:urlString];
     NSURLRequest* imageRequest = [NSURLRequest requestWithURL:url];
-    
+
     CGSize size = shouldDownSample ? CGSizeMake(100, 100) : CGSizeZero;
-    
+
     [[self.bridge moduleForName:@"ImageLoader"] loadImageWithURLRequest:imageRequest size:size scale:1 clipped:!shouldDownSample resizeMode:RCTResizeModeStretch progressBlock:nil partialLoadBlock:nil completionBlock: ^(NSError* error, UIImage* image){
         if (image) {
             callback(UIImagePNGRepresentation(image));
@@ -198,7 +207,7 @@ RCT_EXPORT_METHOD(shareMessage: (NSDictionary*)data
             callback(nil);
         }
     }];
-    
+
 }
 
 #pragma mark - QQApiInterfaceDelegate
@@ -230,16 +239,16 @@ RCT_EXPORT_METHOD(shareMessage: (NSDictionary*)data
 
 #pragma mark - TencentSessionDelegate
 
-- (void)tencentDidLogin { 
-    
+- (void)tencentDidLogin {
+
 }
 
-- (void)tencentDidNotLogin:(BOOL)cancelled { 
-    
+- (void)tencentDidNotLogin:(BOOL)cancelled {
+
 }
 
-- (void)tencentDidNotNetWork { 
-    
+- (void)tencentDidNotNetWork {
+
 }
 
 @end
